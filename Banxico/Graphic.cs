@@ -56,36 +56,28 @@ namespace Banxico
 
             // Extraer los datos de la respuesta JSON
             var observations = data["bmx"]["series"][0]["datos"];
-            List<DateTime> dates = new List<DateTime>();
             List<double> values = new List<double>();
 
             foreach (var obs in observations)
             {
-                dates.Add(DateTime.Parse(obs["fecha"].ToString()));
                 values.Add(double.Parse(obs["dato"].ToString()));
             }
 
             // Crear la gráfica
-            if (dates.Count > 0 && values.Count > 0)
+            if (values.Count > 0)
             {
-                // Convertir las fechas a números (necesario para ScottPlot)
-                double[] dateNumbers = dates.Select(d => d.ToOADate()).ToArray();
-                double[] exchangeRates = values.ToArray();
+                // Crear un array de índices para el eje X (en lugar de fechas)
+                double[] xValues = Enumerable.Range(0, values.Count).Select(i => (double)i).ToArray();
+                double[] yValues = values.ToArray();
 
                 // Añadir los datos a la gráfica
-                var scatter = formsPlot1.Plot.Add.Scatter(dateNumbers, exchangeRates);
+                var scatter = formsPlot1.Plot.Add.Scatter(xValues, yValues);
                 scatter.Label = "Tipo de Cambio";
 
                 // Configurar el título y las etiquetas de los ejes
                 formsPlot1.Plot.Title("Tipo de Cambio Peso a Dólar");
-                formsPlot1.Plot.XLabel("Fecha");
+                formsPlot1.Plot.XLabel("Índice");
                 formsPlot1.Plot.YLabel("Valor");
-
-                // Configurar el eje X para mostrar fechas usando DateTimeTicksBottom
-                formsPlot1.Plot.Axes.DateTimeTicksBottom(format: "yyyy-MM-dd");
-
-                // Ajustar automáticamente los ejes
-                formsPlot1.Plot.AxisAuto();
 
                 // Renderizar la gráfica
                 formsPlot1.Refresh();
