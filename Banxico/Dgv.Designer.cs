@@ -55,7 +55,7 @@
             btnConsult.Name = "btnConsult";
             btnConsult.Size = new Size(116, 44);
             btnConsult.TabIndex = 2;
-            btnConsult.Text = "button1";
+            btnConsult.Text = "Consult";
             btnConsult.UseVisualStyleBackColor = true;
             btnConsult.Click += btnConsult_Click;
             // 

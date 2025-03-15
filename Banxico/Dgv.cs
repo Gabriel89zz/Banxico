@@ -12,28 +12,29 @@ namespace Banxico
 
         private async void btnConsult_Click(object sender, EventArgs e)
         {
+            // Get the selected dates
             DateTime startDate = dtpStartDate.Value;
             DateTime endDate = dtpEndDate.Value;
 
-            // Validar que la fecha de inicio sea menor o igual a la fecha de fin
+            // Validate that the start date is less than or equal to the end date
             if (startDate > endDate)
             {
-                MessageBox.Show("La fecha de inicio debe ser menor o igual a la fecha de fin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The start date must be less than or equal to the end date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                // Realizar la consulta a la API de Banxico
+                // Perform the query to the Banxico API
                 string url = $"https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/{startDate:yyyy-MM-dd}/{endDate:yyyy-MM-dd}?token={apiKey}";
                 var data = await FetchDataFromApi(url);
 
-                // Mostrar los resultados en el DataGridView
+                // Display the results in the DataGridView
                 DisplayResults(data);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al consultar la API: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error querying the API: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -42,30 +43,30 @@ namespace Banxico
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode(); // Lanza una excepción si la respuesta no es exitosa
+                response.EnsureSuccessStatusCode(); // Throws an exception if the response is not successful
                 string responseBody = await response.Content.ReadAsStringAsync();
-                return JObject.Parse(responseBody); // Parsear la respuesta JSON
+                return JObject.Parse(responseBody); // Parse the JSON response
             }
         }
 
         private void DisplayResults(JObject data)
         {
-            // Limpiar el DataGridView
+            // Clear the DataGridView
             dgvResults.Rows.Clear();
             dgvResults.Columns.Clear();
 
-            // Configurar las columnas del DataGridView
-            dgvResults.Columns.Add("date", "Fecha");
-            dgvResults.Columns.Add("value", "Tipo de Cambio");
+            // Set up the columns of the DataGridView
+            dgvResults.Columns.Add("date", "Date");
+            dgvResults.Columns.Add("value", "Exchange Rate");
 
-            // Extraer los datos de la respuesta JSON
+            // Extract data from the JSON response
             var observations = data["bmx"]["series"][0]["datos"];
             foreach (var obs in observations)
             {
                 string date = obs["fecha"].ToString();
                 string value = obs["dato"].ToString();
 
-                // Agregar una fila al DataGridView
+                // Add a row to the DataGridView
                 dgvResults.Rows.Add(date, value);
             }
         }

@@ -28,12 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Graphic";
+            dtpStartDate = new DateTimePicker();
+            dtpEndDate = new DateTimePicker();
+            btnConsult = new Button();
+            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
+            SuspendLayout();
+            // 
+            // dtpStartDate
+            // 
+            dtpStartDate.Location = new Point(53, 45);
+            dtpStartDate.Name = "dtpStartDate";
+            dtpStartDate.Size = new Size(200, 23);
+            dtpStartDate.TabIndex = 0;
+            // 
+            // dtpEndDate
+            // 
+            dtpEndDate.Location = new Point(53, 101);
+            dtpEndDate.Name = "dtpEndDate";
+            dtpEndDate.Size = new Size(200, 23);
+            dtpEndDate.TabIndex = 1;
+            // 
+            // btnConsult
+            // 
+            btnConsult.Location = new Point(96, 149);
+            btnConsult.Name = "btnConsult";
+            btnConsult.Size = new Size(117, 44);
+            btnConsult.TabIndex = 2;
+            btnConsult.Text = "button1";
+            btnConsult.UseVisualStyleBackColor = true;
+            btnConsult.Click += btnConsult_Click;
+            // 
+            // formsPlot1
+            // 
+            formsPlot1.DisplayScale = 1F;
+            formsPlot1.Location = new Point(338, 74);
+            formsPlot1.Name = "formsPlot1";
+            formsPlot1.Size = new Size(383, 226);
+            formsPlot1.TabIndex = 3;
+            // 
+            // Graphic
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(formsPlot1);
+            Controls.Add(btnConsult);
+            Controls.Add(dtpEndDate);
+            Controls.Add(dtpStartDate);
+            Name = "Graphic";
+            Text = "Graphic";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DateTimePicker dtpStartDate;
+        private DateTimePicker dtpEndDate;
+        private Button btnConsult;
+        private ScottPlot.WinForms.FormsPlot formsPlot1;
     }
 }
