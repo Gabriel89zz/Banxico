@@ -30,11 +30,12 @@
         {
             btnDgv = new Button();
             btnGraphic = new Button();
+            btnPiePlot = new Button();
             SuspendLayout();
             // 
             // btnDgv
             // 
-            btnDgv.Location = new Point(69, 188);
+            btnDgv.Location = new Point(166, 83);
             btnDgv.Name = "btnDgv";
             btnDgv.Size = new Size(172, 66);
             btnDgv.TabIndex = 0;
@@ -44,23 +45,35 @@
             // 
             // btnGraphic
             // 
-            btnGraphic.Location = new Point(314, 192);
+            btnGraphic.Location = new Point(455, 83);
             btnGraphic.Name = "btnGraphic";
             btnGraphic.Size = new Size(172, 66);
             btnGraphic.TabIndex = 1;
-            btnGraphic.Text = "Graphic";
+            btnGraphic.Text = "Graphics";
             btnGraphic.UseVisualStyleBackColor = true;
             btnGraphic.Click += btnGraphic_Click;
+            // 
+            // btnPiePlot
+            // 
+            btnPiePlot.Location = new Point(294, 227);
+            btnPiePlot.Name = "btnPiePlot";
+            btnPiePlot.Size = new Size(172, 66);
+            btnPiePlot.TabIndex = 4;
+            btnPiePlot.Text = "Pie Plot";
+            btnPiePlot.UseVisualStyleBackColor = true;
+            btnPiePlot.Click += btnPiePlot_Click;
             // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnPiePlot);
             Controls.Add(btnGraphic);
             Controls.Add(btnDgv);
             Name = "Menu";
             Text = "Menu";
+            FormClosed += Menu_FormClosed_1;
             ResumeLayout(false);
         }
 
@@ -68,5 +81,6 @@
 
         private Button btnDgv;
         private Button btnGraphic;
+        private Button btnPiePlot;
     }
 }

@@ -29,5 +29,16 @@ namespace Banxico
             Graphic graphic = new Graphic();
             graphic.Show();
         }
+
+        private void btnPiePlot_Click(object sender, EventArgs e)
+        {
+            PiePlot piePlot = new PiePlot();
+            piePlot.Show();
+        }
+
+        private void Menu_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
